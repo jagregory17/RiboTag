@@ -1,7 +1,4 @@
 #!/bin/bash
-#$ -cwd
-#$ -pe smp 4
-#$ -l h_vmem=100G
 
 #checking for 3 arguments
 if [ $# -ne 3 ];
@@ -16,10 +13,8 @@ alignment=$2  # folder with appropriate STAR alignment
 genome=$3 #what genome; this retrives the list of chromosomes from a STAR index for the appropriate genome
 
 ## Print bash current base directory and script directory:
-current_dir=$(pwd)
 script_dir=$(dirname $0)
 BASEDIR=$(pwd)
-echo "Current directory = $current_dir"
 echo "Script directory = $script_dir"
 echo "Script was exectured from = $BASEDIR"
 
@@ -29,7 +24,7 @@ then
     exit 1
 fi
 
-# 
+
 BAM=$BASEDIR/${sample}/${alignment}/${sample}_Aligned.out.sorted.bam
 if [ ! -f $BAM ];then
     echo "+++ERROR+++ could not find BAM file in $BASEDIR/${sample}/${alignment}/STAR/STAR_alignment/"
@@ -38,8 +33,8 @@ else
     echo "found BAM file!"
 fi
 
-source /etc/profile.d/modules.sh #required for qsub-based 'module load'
-module load samtools/1.7 # latest version as of 4/26/2018
+source /etc/profile.d/modules.sh 
+module load samtools/1.7 
 
 # set path to STAR correct STAR chrName.txt file
 if [ $genome == "mm20" ]; then
