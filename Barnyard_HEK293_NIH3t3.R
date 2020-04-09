@@ -30,31 +30,8 @@ setwd(project)
 # load data from samtools count data, which calculates the number of uniquely mapping reads at the chromosome level
 ################
 
-count.files <- dir(project, pattern = "samtools.count.dobin.txt", full.names = TRUE, ignore.case = TRUE, recursive = TRUE)
-count.files <- grep("Exo_alignment", count.files, ignore.case = TRUE, value = TRUE) # return just the count files from the Exo alignment (mm20/hg38/gfp/mCherry)
-
-inputcontrol <- read.table(count.files[1], stringsAsFactors = FALSE) # this the input control aligned to the hybrid genome
-input.controlname <- basename(count.files[1])
-input.controlname <- gsub("_Exo_alignment_samtools.count.dobin.txt", "", input.controlname)
-
-# file structure has 1 line chromosome, then next line is the count for that chromosome
-chrm_reads <- seq(from = 2, to = nrow(inputcontrol), by = 2) # even rows - counts 
-chrm_name <- seq(1, (nrow(inputcontrol)-1), 2) # odd rows - chromosome
-inputcontrol.chr_reads <- inputcontrol[chrm_reads,]  # get count subset
-inputcontrol.chr_name <- inputcontrol[chrm_name,] # get chromosome name subset
-inputcontrol.data.frame <- data.frame(inputcontrol.chr_name, as.numeric(inputcontrol.chr_reads)) #make a dataframe
-colnames(inputcontrol.data.frame) <- c("chromosome", input.controlname) 
-
-# make a dataframe with the number of reads across samples
-for (x in 2:length(count.files)) {
-  count.data <- read.table(count.files[x], stringsAsFactors = FALSE) # this the input control aligned to the hybrid genome
-  sample.name <- basename(count.files[x])
-  sample.name <- gsub("_Exo_alignment_samtools.count.dobin.txt", "", sample.name)
-  # file structure has 1 line chromosome, then next line counts
-  chrm_reads <- seq(from = 2, to = nrow(inputcontrol), by = 2) # even rows - counts 
-  inputcontrol.chr_reads <- count.data[chrm_reads,]  # get count subset
-  inputcontrol.data.frame[,sample.name] <- as.numeric(inputcontrol.chr_reads) #make a dataframe
-}
+inputcontrol.data.frame <- read.table(file = "path.to.file/barnyard.samtools.count.tab", sep = "\t", stringsAsFactors = F)
+#normalize to the number of uniquely mapping reads
 
 #normalize each sample to the number of uniquely mapping reads
 for (x in 2:ncol(inputcontrol.data.frame)) {
