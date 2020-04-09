@@ -9,7 +9,7 @@ fi
 
 
 sample=$1  # sample name
-alignment=$2  # folder with appropriate STAR alignment
+alignment=$2  # directory with appropriate STAR alignment
 genome=$3 #what genome; this retrives the list of chromosomes from a STAR index for the appropriate genome
 
 ## Print bash current base directory and script directory:
