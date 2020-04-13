@@ -1,0 +1,17 @@
+Sample_description	library_name	RNA_input	cDNA_INPUT	Library_prep_date	cell.type	sample.type	tag	donor
+IC	NPC IC 1M	NPC IC 1M	15	15	20190430	NPC	TSP	NA	553
+IP	NPC IP 1M	NPC IP 1M	15	15	20190430	NPC	IP	HA	553
+Sample_lib1	Motor Neuron IC	Sample_lib1	50	100	20190828	MN	TSP	NA	3234
+Sample_lib13	Motor Neuron V5 IP	Sample_lib13	50	100	20190828	MN	IP	V5	3234
+Sample_lib15	MN IC	Sample_lib15	40	100	20190828	MN	TSP	NA	3234
+Sample_lib22	3234-2/pJAG151 motor neuron IC	Sample_lib22	50	100	20190829	MN	TSP	NA	3234
+Sample_lib24	3234-2/pJAG143 motor neuron 6-10 IC	Sample_lib24	50	100	20190829	MN	TSP	NA	3234
+Sample_lib26	3234-2/pJAG143 motor neuron 6-17 IC	Sample_lib26	1	100	20190829	MN	TSP	NA	3234
+Sample_lib29	3234-2/pJAG151 motor neuron IP	Sample_lib29	50	100	20190829	MN	IP	V5	3234
+Sample_lib32	GABA HA IC	Sample_lib32	50	100	20190829	GABA	TSP	NA	553
+Sample_lib33	GABA V5 IC	Sample_lib33	50	100	20190829	GABA	TSP	NA	553
+Sample_lib34	GABA HA IP	Sample_lib34	50	100	20190829	GABA	IP	HA	553
+Sample_lib35	GABA V5 IP	Sample_lib35	1	25	20190829	GABA	IP	V5	553
+Sample_lib36	MN IC 10-16	Sample_lib36	22	25	20190829	MN	TSP	NA	3234
+Sample_lib7	Motor Neuron V5 IP	Sample_lib7	1	5	20190828	MN	IP	V5	3234
+Sample_lib9	Motor Neuron IC	Sample_lib9	50	100	20190828	MN	TSP	NA	3234
