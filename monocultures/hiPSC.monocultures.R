@@ -25,6 +25,9 @@ rm(list=ls())
 counts <- read.table(file = "path.to.feature.counts", stringsAsFactors = F, sep = "\t")
 meta.data <- read.table(file = "path.to.meta.data", sep = "\t", stringsAsFactors = F)
 
+# select columns corresponding to samples used for this analysis; found in meta data file
+counts <- counts %>% filter(sample %in% rownames(meta.data))
+
 # check ordering of counts and meta data
 rownames(meta.ordered) == colnames(counts.only) # test if rows of meta are equal to columns of counts; this should output a logical of all 'TRUE' if it worked.
 counts.only.ordered <- counts.only
