@@ -61,7 +61,7 @@ TSPvsIP.results <- as.data.frame(TSPvsIP) # make a data frame from the DESeq obj
 TSPvsIP.results$ensembl_gene_id <- gsub("\\..*","", rownames(TSPvsIP.results)) #get rid of the version number
 rownames(TSPvsIP.results) <- TSPvsIP.results$ensembl_gene_id # make rownames without version number
 human.geneInfo.biomaRt <- read.table(file = "path.to.annotation.info", header = T, sep = "\t", stringsAsFactors = F) # load biomaRt info from saved table instead of biomaRt; faster
-annotated.TSPvsIP <- left_join(TSPvsIP.results, human.geneInfo.biomaRt) # merge with annotations
+annotated.TSPvsIP <- left_join(TSPvsIP.results, human.geneInfo.biomaRt) # merge with annotations by ensembl gene id
 
 ###########################
 # GSEA analysis looking at gene biotype enrichment
