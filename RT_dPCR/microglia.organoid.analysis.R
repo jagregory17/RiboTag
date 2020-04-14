@@ -19,12 +19,11 @@ library(scales)
 library(ggpubr)
 library(gridExtra)
 
-dPCR.data <- read.table(file = "/gpfs/commons/home/jgregory/ddPCR/20191203microglia.tab",
+dPCR.data <- read.table(file = "/path.to.file/20191203organoid.microglia.tab",
                         sep = "\t", 
                         stringsAsFactors = F)
 
            
-
 # put means and standard deviations into a table
 dPCR.summary <- dPCR.data %>% 
   group_by(matched_samples, sample_names, IPantibody, cell_type, culture_type) %>% 
