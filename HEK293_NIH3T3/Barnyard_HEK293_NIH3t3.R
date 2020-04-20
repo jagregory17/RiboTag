@@ -30,8 +30,8 @@ setwd(project)
 # load data from samtools count data, which calculates the number of uniquely mapping reads at the chromosome level
 ################
 
-inputcontrol.data.frame <- read.table(file = "path.to.file/barnyard.samtools.count.tab", sep = "\t", stringsAsFactors = F)
-#normalize to the number of uniquely mapping reads
+#load samtools count file
+inputcontrol.data.frame <- read.table(file = "/path.to.file/barnyard.samtools.count.tab", sep = "\t", stringsAsFactors = F)
 
 #normalize each sample to the number of uniquely mapping reads
 for (x in 2:ncol(inputcontrol.data.frame)) {
@@ -71,6 +71,13 @@ ggplot(exo.genes, aes(x=sample, y=ratio)) +
   theme_minimal() + 
   scale_y_continuous(trans='log2', breaks = trans_breaks("log2", function(x) 2^x), labels = trans_format("log2", math_format(2^.x))) +
   ylab(expression(paste("[", italic("mCherry"), "]/[", italic("GFP"), "]", sep = "")))
+
+#reformat the data
+test <- melt(inputcontrol.data.frame, id.vars = c("chromosome", "cell.species"), measure.vars = colnames(inputcontrol.data.frame[,c(12,13,9,14,11,15,10)])) #select them in the right order
+test$cell.species <- as.factor(test$cell.species)
+new.order <- c("human", "Mouse", "Input.Control", "HA.IP1_human", "V5.IP2_mouse", "V5.IP1_mouse", "HA.IP2_human")
+test$variable <- factor(test$variable ,levels = new.order)
+test$chromosome <- factor(test$chromosome, levels = unique(test$chromosome))
 
 #calculate summary data
 table.sum <- aggregate(test$value, by=list(species=test$cell.species, sampleIP=test$variable), FUN=sum)
@@ -255,10 +262,10 @@ ggplot(melt.again, aes(x=variable, y=value, color=chromosome)) +
                                 'GFP'='deepskyblue')) +
   geom_line(aes(group = IP), color="black") +
   theme_minimal()
-  
+
 
 # look at gene level counts data from featureCounts
-counts <- read.table(file = "/gpfs/commons/home/jgregory/Barnyard/barnyard.count.matrix.tab", header = T, sep = "\t")
+counts <- read.table(file = "/path.to.file/barnyard.count.matrix.tab", header = T, sep = "\t")
 isexpr <- rowSums(cpm(counts[,c(3:9)])>1) >= 3 # this keeps all genes with at least 0.5 cpm in at least 3 of the samples.
 sum(isexpr, na.rm = TRUE) 
 counts <- counts[isexpr,] # filter low genes
@@ -270,8 +277,8 @@ human.geneInfo.biomaRt$chrom <- paste("Hs_chr", human.geneInfo.biomaRt$chromosom
 mouse.geneInfo.biomaRt$chrom <- paste("Mm_chr", mouse.geneInfo.biomaRt$chromosome_name, sep = "")
 #harmonize colnames for the mouse and human biomart dataframes
 cols.to.use <- intersect(colnames(human.geneInfo.biomaRt), colnames(mouse.geneInfo.biomaRt)) # which columns overlap
-combine.biomart.mouse <- mouse.geneInfo.biomaRt %>% dplyr::select(cols.to.use)
-combine.biomart.human <- human.geneInfo.biomaRt %>% dplyr::select(cols.to.use)
+combine.biomart.mouse <- mouse.geneInfo.biomaRt %>% dplyr::select(all_of(cols.to.use))
+combine.biomart.human <- human.geneInfo.biomaRt %>% dplyr::select(all_of(cols.to.use))
 total.biomart <- rbind(combine.biomart.human, combine.biomart.mouse) # combine using overlapping columns
 counts.biomart <- counts # make a new dataframe for adding biomart info 
 counts.biomart$ensembl_gene_id <- gsub("\\..*","", counts.biomart$Geneid) #remove version number
@@ -286,7 +293,7 @@ meltraw.counts.biomart <- melt(counts.biomart, id.vars = c("gene_biotype", "spec
                                                                                                                  "R12_IP2_V5", 
                                                                                                                  "R11_IP2_HA",
                                                                                                                  "R7_IP1_HA"))
-                                                                                                                 
+
 #plot protein coding vs all other biotypes
 biotypes <- unique(meltraw.counts.biomart$gene_biotype)
 for (x in 2:length(biotypes)) {
