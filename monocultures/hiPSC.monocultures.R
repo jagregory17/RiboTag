@@ -22,18 +22,18 @@ library("tibble")
 rm(list=ls())
 
 # read in count data
-counts <- read.table(file = "path.to.feature.counts", stringsAsFactors = F, sep = "\t")
-meta.data <- read.table(file = "path.to.meta.data", sep = "\t", stringsAsFactors = F)
+counts <- read.table(file = "path.to.file/20200421.monoculture.counts.tab", stringsAsFactors = F, sep = "\t")
+meta.data <- read.table(file = "path.to.file/20200421.meta.data.tab", sep = "\t", stringsAsFactors = F)
 
 # select columns corresponding to samples used for this analysis; found in meta data file
-counts <- counts %>% filter(sample %in% rownames(meta.data))
+counts <- counts %>% select(rownames(meta.data))
 
 # check ordering of counts and meta data
-rownames(meta.ordered) == colnames(counts.only) # test if rows of meta are equal to columns of counts; this should output a logical of all 'TRUE' if it worked.
-counts.only.ordered <- counts.only
+rownames(meta.data) == colnames(counts) 
+counts.only.ordered <- counts
 
 #create DESeq object to compare 
-dds <- DESeqDataSetFromMatrix(countData=counts.only.ordered, colData=meta.ordered, design=~RNA_bin + sample.type) 
+dds <- DESeqDataSetFromMatrix(countData=counts.only.ordered, colData=meta.data, design=~RNA_bin + sample.type) 
 keep <- rowSums(counts(dds)) >= 100 #filtering criteria, same as recommended in DESeq vignette; creates a logical
 sum(keep, na.rm = T)
 dds <- dds[keep,] #get rid of genes with very low counts
@@ -49,7 +49,7 @@ vst <- vst(dds, blind=TRUE) # faster version of rld and almost equivalent
 vst.assay <- as.data.frame(assay(vst)) #extract the vst normalized counts
 pheatmap(assay(vst)[select,], cluster_rows=TRUE, show_rownames=FALSE,
          cluster_cols=TRUE, annotation_col=df)
-         
+
 #########################
 ## Differential expression
 ##########################
@@ -63,7 +63,7 @@ summary(TSPvsIP)
 TSPvsIP.results <- as.data.frame(TSPvsIP) # make a data frame from the DESeq object specifying the contrast
 TSPvsIP.results$ensembl_gene_id <- gsub("\\..*","", rownames(TSPvsIP.results)) #get rid of the version number
 rownames(TSPvsIP.results) <- TSPvsIP.results$ensembl_gene_id # make rownames without version number
-human.geneInfo.biomaRt <- read.table(file = "path.to.annotation.info", header = T, sep = "\t", stringsAsFactors = F) # load biomaRt info from saved table instead of biomaRt; faster
+human.geneInfo.biomaRt <- read.table(file = "path.to.file/human.geneInfo.biomaRt.tab"), header = T, sep = "\t", stringsAsFactors = F) # load biomaRt annotations
 annotated.TSPvsIP <- left_join(TSPvsIP.results, human.geneInfo.biomaRt) # merge with annotations by ensembl gene id
 
 ###########################
@@ -86,13 +86,14 @@ res2 <- TSPvsIP.results.filter %>%
   dplyr::select(ensembl_gene_id, stat) %>% 
   na.omit() %>% 
   distinct() %>% 
-  group_by(ensembl_gene_id) %>% 
+  group_by(ensembl_gene_id) %>%
   summarize(stat=mean(stat))
 res2
 
-ranks <- deframe(res2) # convert to dataframe
+ranks <- deframe(res2) # convert to named vector
 barplot(sort(ranks, decreasing = T)) # make a plot of the ranks
 head(ranks, 20)
+res2$ensembl_gene_id == res2.test$ensembl_gene_id
 
 # run pre-ranked gene set enrichment analysis
 fgseaRes <- fgsea(pathways=genes.by.biotype, stats=ranks, nperm=10000, minSize = 10)
@@ -164,7 +165,7 @@ ggplot(fgseaResTidy, aes(reorder(pathway, NES), NES)) +
 ############################
 ## Plotting specific marker genes
 ############################
-human.geneInfo.biomaRt <- read.table(file = file.path("/gpfs/commons/home/jgregory/MN_astro_coCulture/20190918", "human.geneInfo.biomaRt.tab"), header = T, sep = "\t", stringsAsFactors = F) # load biomaRt info from saved table instead of biomaRt; faster
+human.geneInfo.biomaRt <- read.table(file = "path.to.file/human.geneInfo.biomaRt.tab"), header = T, sep = "\t", stringsAsFactors = F) # load biomaRt info from saved table instead of biomaRt; faster
 vst <- vst(dds, blind=TRUE) # faster version of rld and almost equivalent
 vst.assay <- as.data.frame(assay(vst)) #extract the vst normalized counts
 vst.assay$ensembl_gene_id <- gsub("\\..*","", rownames(vst.assay)) #get rid of the version number
@@ -179,7 +180,7 @@ gaba.genes <- c("ENSG00000078018", "ENSG00000128683", "ENSG00000136750", "ENSG00
 gaba.counts <- vst.assay %>% filter(ensembl_gene_id %in% gaba.genes) 
 transpose.gaba.counts <- t(gaba.counts[,c(1:16)])
 colnames(transpose.gaba.counts) <- gaba.counts$ensembl_gene_id
-meta.gaba.counts <- cbind(transpose.gaba.counts, meta.ordered)
+meta.gaba.counts <- cbind(transpose.gaba.counts, meta.data)
 
 melt.counts <- melt(meta.gaba.counts, id.vars = c("cell.type", "sample.type", "pairs"), measure.vars = colnames(meta.gaba.counts[1:NCOL(transpose.gaba.counts)]))
 melt.counts$sample.combo <- paste(melt.counts$cell.type, melt.counts$sample.type, sep = "-")
@@ -201,5 +202,3 @@ ggplot(melt.counts, aes(x=variable, y=value)) +
                      values = c('IP'=1,
                                 'TSP'=16),
                      labels = c('IP', 'Input')) 
-                     
-                     
