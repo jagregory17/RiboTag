@@ -1,0 +1,38 @@
+X	Differentiation_Date	IP_date	cDNA_date	Library_prep_date	Index	Kit	library_name	Sample_description	RNA_yield_ng	RNA_input	cDNA_yield	cDNA_INPUT	cycles	Library.concentration..Qubit.	Average.size..BA...bp.	Library.concentration..nM...qPCR.	Sample_Type	Culture_Type	Cell.Type	Group	Antibody	RNA_bin	paired.samples							
+Sample_lib1	20190603	20190715	20190718	20190828	UDP0001	A	Sample_lib1	Motor Neuron IC	123.76	50	1352	100	5	7.89	549	39.9191097	Input	monoculture	Motor Neuron	motor.neuron.input	none	high	yellow							
+Sample_lib10	20190528	20190626	20190709	20190828	UDP0010	A	Sample_lib10	Co-culture IC	604.8	50	2160	100	5	5.5	555	23.65827501	Input	co-culture	Mix	co.culture.input	none	high	green							
+Sample_lib11	20190528	20190626	20190709	20190828	UDP0011	A	Sample_lib11	Astro IC	322	50	2200	100	5	7.23	560	27.90780093	Input	monoculture	Astrocyte	astro.input	none	high	green							
+Sample_lib12	20190528	20190626	20190709	20190828	UDP0012	A	Sample_lib12	Co-culture HA IP	158.2	50	2120	100	5	3.63	512	18.05859091	IP	co-culture	Astrocyte	co.culture.astro.IP	HA	high	green							
+Sample_lib13	20190528	20190626	20190709	20190828	UDP0013	A	Sample_lib13	Motor Neuron V5 IP	261.8	50	884	100	5	2.62	461	16.70507259	IP	monoculture	Motor Neuron	motor.neuron.IP	V5	high	green							
+Sample_lib14	20190528	20190626	20190709	20190828	UDP0014	A	Sample_lib14	Co-culture V5 IP	422.8	50	2240	100	5	5.04	540	25.71714044	IP	co-culture	Motor Neuron	co.culture.motor.neuron.IP	V5	high	green							
+Sample_lib15	20190417	20190515	20190521	20190828	UDP0015	A	Sample_lib15	MN IC	97.02	40	488	100	5	5.25	534	34.16694667	Input	monoculture	Motor Neuron	motor.neuron.input	none	high	orange							
+Sample_lib16	20190417	20190515	20190521	20190828	UDP0016	A	Sample_lib16	Astro IC	233.8	40	1196	100	5	4.27	552	16.36957236	Input	monoculture	Astrocyte	astro.input	none	high	orange							
+Sample_lib17	20190417	20190515	20190521	20190828	UDP0017	A	Sample_lib17	Co-cult IC	477.4	40	1500	100	5	6.54	527	31.58701472	Input	co-culture	Mix	co.culture.input	none	high	orange							
+Sample_lib18	20190417	20190515	20190521	20190828	UDP0018	A	Sample_lib18	Co-cult V5 IP	0	1	89.6	25	6	2.19	490	10.04981308	IP	co-culture	Motor Neuron	co.culture.motor.neuron.IP	V5	low	orange							
+Sample_lib19	20190417	20190515	20190521	20190828	UDP0019	A	Sample_lib19	Astro HA IP	366.8	40	1196	100	5	4.42	483	29.01550309	IP	monoculture	Astrocyte	astro.IP	HA	high	orange							
+Sample_lib2	20190603	20190715	20190718	20190828	UDP0002	A	Sample_lib2	Co-culture IC	176.4	50	1300	100	5	8.08	578	43.59852587	Input	co-culture	Mix	co.culture.input	none	high	yellow							
+Sample_lib20	20190417	20190515	20190521	20190828	UDP0020	A	Sample_lib20	Co-cult HA IP	431.2	40	1580	100	5	1.82	521	11.59739153	IP	co-culture	Astrocyte	co.culture.astro.IP	HA	high	orange							
+Sample_lib21	20190610	20190730	20190806	20190829	UDP0021	B	Sample_lib21	3234-2/pJAG151 co-culture IC	428.4	50	4560	100	5	1.4	607	2.834202562	Input	co-culture	Mix	co.culture.input	none	high	pink							
+Sample_lib22	20190610	20190730	20190806	20190829	UDP0022	B	Sample_lib22	3234-2/pJAG151 motor neuron IC	144.2	50	2920	100	5	1.02	582	1.75298164	Input	monoculture	Motor Neuron	motor.neuron.input	none	high	pink							
+Sample_lib23	20190610	20190730	20190806	20190829	UDP0023	B	Sample_lib23	3234-2/pJAG143 co-culture 6-10 IC	560	50	4280	100	5	1.58	613	3.749448827	Input	co-culture	Mix	co.culture.input	none	high	blue							
+Sample_lib24	20190610	20190730	20190806	20190829	UDP0024	B	Sample_lib24	3234-2/pJAG143 motor neuron 6-10 IC	118.72	50	3436	100	5	1.66	604	4.58420559	Input	monoculture	Motor Neuron	motor.neuron.input	none	high	blue							
+Sample_lib25	20190617	20190730	20190806	20190829	UDP0025	B	Sample_lib25	3234-2/pJAG143 co-culture 6-17 IC	394.8	50	4880	100	5	1.16	593	2.637298575	Input	co-culture	Mix	co.culture.input	none	high	red							
+Sample_lib26	20190617	20190730	20190806	20190829	UDP0026	B	Sample_lib26	3234-2/pJAG143 motor neuron 6-17 IC	0	1	1156	100	5	2.94	541	16.97735976	Input	monoculture	Motor Neuron	motor.neuron.input	V5	low	red							
+Sample_lib27	NA	20190730	20190806	20190829	UDP0027	B	Sample_lib27	astrocyte monoculture IC	1960	50	4560	100	5	1.11	600	4.50476265	Input	monoculture	Astrocyte	astro.input	none	high	null							
+Sample_lib28	20190610	20190730	20190806	20190829	UDP0028	B	Sample_lib28	3234-2/pJAG151 co-culture IP	187.6	50	1480	100	5	4.29	566	18.38272668	IP	co-culture	Motor Neuron	co.culture.motor.neuron.IP	HA	high	pink							
+Sample_lib29	20190610	20190730	20190806	20190829	UDP0029	B	Sample_lib29	3234-2/pJAG151 motor neuron IP	172.2	50	948	100	5	3.74	493	7.840400726	IP	monoculture	Motor Neuron	motor.neuron.IP	HA	high	pink							
+Sample_lib3	20190603	20190715	20190718	20190828	UDP0003	A	Sample_lib3	Astro IC	0	1	148.8	10	8	1.52	497	18.34749623	Input	monoculture	Astrocyte	astro.input	none	low	yellow							
+Sample_lib30	20190610	20190730	20190806	20190829	UDP0030	B	Sample_lib30	3234-2/pJAG143 co-culture 6-10 IP	0	1	50	25	6	1.86	505	10.774253	IP	co-culture	Motor Neuron	co.culture.motor.neuron.IP	V5	low	blue							
+Sample_lib31	20190617	20190730	20190806	20190829	UDP0031	B	Sample_lib31	3234-2/pJAG143 co-culture 6-17 IP	0	1	38.2	25	6	1.56	498	10.97347932	IP	co-culture	Motor Neuron	co.culture.motor.neuron.IP	V5	low	red							
+Sample_lib32	NA	20190314	20190806	20190829	UDP0032	B	Sample_lib32	GABA HA IC	85.2	50	2360	100	5	0.201	567	27.81923222	Input	monoculture	GABA	GABA control	none	high	purple							
+Sample_lib33	NA	20190314	20190806	20190829	UDP0033	B	Sample_lib33	GABA V5 IC	73.4	50	2320	100	5	3.23	571	9.505672138	Input	monoculture	GABA	GABA control	none	high	black							
+Sample_lib34	NA	20190314	20190806	20190829	UDP0034	B	Sample_lib34	GABA HA IP	43.2	50	2668	100	5	1.98	538	10.51628816	IP	monoculture	GABA	GABA IP control	HA	high	purple							
+Sample_lib35	NA	20190314	20190806	20190829	UDP0035	B	Sample_lib35	GABA V5 IP	0	1	50.4	25	6	2.49	501	21.08300788	IP	monoculture	GABA	GABA IP control	V5	low	black							
+Sample_lib36	20180924	20181016	20190416	20190829	UDP0036	B	Sample_lib36	MN IC 10-16	3.92	22	59.4	25	6	2.04	516	21.81431163	Input	monoculture	Motor Neuron	motor.neuron.input	none	high	blue							
+Sample_lib5	20190603	20190715	20190718	20190828	UDP0005	A	Sample_lib5	Co-culture HA IP	42.4	50	1224	100	5	8.42	577	37.01407284	IP	co-culture	Astrocyte	co.culture.astro.IP	HA	high	yellow							
+Sample_lib6	20190603	20190715	20190718	20190828	UDP0006	A	Sample_lib6	Astro HA IP	7.72	50	1144	100	5	7.65	545	30.0387109	IP	monoculture	Astrocyte	astro.IP	HA	high	yellow							
+Sample_lib7	20190603	20190715	20190718	20190828	UDP0007	A	Sample_lib7	Motor Neuron V5 IP	0	1	21.8	5	12	5.37	454	46.6261524	IP	monoculture	Motor Neuron	motor.neuron.IP	V5	low	yellow							
+Sample_lib8	20190603	20190715	20190718	20190828	UDP0008	A	Sample_lib8	Co-culture V5 IP	0	1	9.24	2.5	12	3.37	491	20.40480678	IP	co-culture	Motor Neuron	co.culture.motor.neuron.IP	V5	low	yellow							
+Sample_lib9	20190528	20190626	20190709	20190828	UDP0009	A	Sample_lib9	Motor Neuron IC	18.5	50	2320	100	5	5.43	528	36.50718753	Input	monoculture	Motor Neuron	motor.neuron.input	none	high	green							
+NPC_IC	NA	NA	NA	20190430	H707/H505	C	NPC_IC	NPC input	84.4	15	104.4	15	9	7.33	506	16.40980474	Input	monoculture	NPC	NPC input	none	high	violet							
+NPC_IP	NA	NA	NA	20190430	H710/H506	C	NPC_IP	NPC IP	20.6	15	65.88	15	9	7.14	502	13.48844855	IP	monoculture	NPC	NPC IP	HA	high	violet							
