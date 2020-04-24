@@ -216,3 +216,38 @@ d <- ggplot(melt.meta.data.percent.human, aes(x = Group, y = value)) +
 
 ggarrange(a, b, c, d)
 
+######################
+# plot ratios of reporter genes
+#####################
+
+samtools.count.matrix$chromosome <- chromosomes # add back column for chromosomes
+gfp.mcherry <- samtools.count.matrix %>% filter(chromosomes %in% c("mCherry", "GFP")) # select gfp and mcherry
+ratio <- gfp.mcherry[1,1:15]/gfp.mcherry[2,1:15] # calculate ratio
+meta.data.subset$library_name == colnames(gfp.mcherry)[1:15] # check order
+meta.data.subset$mcherry.gfp.ratio <- as.numeric(ratio) # add to meta data
+melt.ratio <- melt(meta.data.subset, 
+                   id.vars = c("library_name", "Antibody", "Group", "paired.samples"), 
+                   measure.vars = c("mcherry.gfp.ratio"))
+
+# libraries with cocultures and both IPs
+full.matched.cocultures <- c("Sample_lib2", "Sample_lib5", "Sample_lib8",
+                        "Sample_lib10", "Sample_lib12", "Sample_lib14",
+                        "Sample_lib17", "Sample_lib20", "Sample_lib18")
+
+melt.ratio <- melt.ratio %>% filter(library_name %in% full.matched.cocultures)
+
+ggplot(melt.ratio, aes(x=Group, y=value, color=Antibody)) +
+  geom_point(position = "identity", size = 4) +
+  #scale_y_continuous(trans='log2', breaks = trans_breaks("log2", function(x) 2^x), labels = trans_format("log2", math_format(2^.x))) +
+  scale_y_continuous(trans = log2_trans(),
+                     breaks = c(0.00390625,0.015625,0.0625,0.25,1,4,16,64),
+                     limits = c(0.00390625,128),
+                     #breaks = trans_breaks("log2", function(x) 2^x),
+                     labels = trans_format("log2", math_format(2^.x))) +
+  geom_line(aes(group = paired.samples), color="black") +
+  scale_color_manual(values=c("orchid3", "gold", "deepskyblue")) +
+  #theme(axis.text.x = element_text(angle = 90)) +
+  ylab(expression(paste("[", italic("mCherry"), "]/[", italic("GFP"), "]", sep = ""))) +
+  scale_x_discrete(labels = c("MN IP", "co-culture", "mAstro IP")) +
+  theme_minimal()
+
