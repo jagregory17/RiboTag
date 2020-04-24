@@ -193,4 +193,26 @@ c <- ggplot(melt.meta.percent.human.mouse,
   ylab("% uniquely mapped reads") +
   labs(title = "protein coding")
 
-ggarrange(a,b,c)
+##################
+# make plot showing matched samples
+# using protein coding non MT genes
+###################
+
+
+melt.meta.data.percent.human <- melt(meta.data.subset, 
+                                     id.vars = c("library_name", "Antibody", "Group", "paired.samples"), 
+                                     measure.vars = c("percent.human"))
+
+
+d <- ggplot(melt.meta.data.percent.human, aes(x = Group, y = value)) +
+  geom_point(aes(color = factor(Antibody), size = 12)) +
+  scale_color_manual(values = c("orchid", "gold", "deepskyblue")) +
+  geom_line(aes(group = paired.samples)) +
+  ylim(c(0,100)) +
+  theme(axis.text.x = element_text(angle = 90)) +
+  scale_x_discrete(labels = c("Astro IP", "co-culture", "MN IP"))
+#facet_grid(~variable)
+
+
+ggarrange(a, b, c, d)
+
