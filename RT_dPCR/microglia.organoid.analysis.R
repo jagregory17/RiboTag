@@ -49,7 +49,7 @@ ggplot(dPCR.summary.microglia.cocultures, aes(x=IPantibody, y=ratio, color=cell_
                               "microglia_organoid" = "#619CFF"),
                      labels = c("microglia" = "microglia monoculture", 
                                 "microglia_organoid" = "microglia/organoid co-culture")) +
-  ylab(expression(paste("[", italic("mCherry"), "]/[", italic("MTCO2"), "]", sep = ""))) +
+  ylab(expression(paste("[", italic("GFP"), "]/[", italic("MTCO2"), "]", sep = ""))) +
   theme_minimal() 
 
 # melt data into long format for plotting with ggplot
